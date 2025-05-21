@@ -10,13 +10,13 @@ module.exports.getMessages = async (req, res, next) => {
             },
         }).sort({ updatedAt: 1});
 
-        const projectMessages = messages.map((map) => {
+        const projectedMessages = messages.map((msg) => {
             return {
                 fromSelf: msg.sender.toString() === from,
-                messag: msg.message.text,
+                message: msg.message.text,
             };
         });
-        res.json(projectMessages);
+        res.json(projectedMessages);
     } catch (ex) {
         next(ex);
     }
@@ -31,7 +31,7 @@ module.exports.addMessage = async (req, res, next) => {
             sender: from,
         });
         if (data)
-            return res.json({ msg: "Message added successfully."})
+            return res.json({ msg: "Message added successfully."});
         else return res.json({ msg: "Failed to add message to the database" });
     } catch (ex) {
         next(ex);

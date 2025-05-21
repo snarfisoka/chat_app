@@ -1,10 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const authRoutes = require("./routes/auth")
-const messageRoutes = require("./routes/messages")
+const authRoutes = require("./routes/auth");
+const messageRoutes = require("./routes/messages");
 const app = express();
-const socket = require("socket.io")
+const socket = require("socket.io");
 require("dotenv").config();
 
 app.use(cors());
@@ -19,7 +19,7 @@ mongoose
         console.log("DB Connection Successful");
     })
     .catch((err) => {
-        console.log(err.message);
+        console.error(err.message);
     });
 
 app.get("/ping", (_req, res) => {
@@ -47,7 +47,7 @@ io.on("connection", (socket) => {
         onlineUsers.set(userId, socket.id);
     });
     socket.on("send-msg", (data) => {
-        const sendUserSocket = onlineUsers.get(data.io);
+        const sendUserSocket = onlineUsers.get(data.to);
         if (sendUserSocket) {
             socket.to(sendUserSocket).emit("msg-receive", data.msg);
         }

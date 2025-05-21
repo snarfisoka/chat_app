@@ -3,18 +3,20 @@ import styled from "styled-components";
 import Logo from "../assets/logo.svg";
 
 
-export default function Contacts({ contacts, currentUser, changeChat }) {
+export default function Contacts({ contacts, changeChat }) {
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
     
     useEffect(() => {
-        if(currentUser) {
-            setCurrentUserImage(currentUser.avatarImage);
-            setCurrentUserName(currentUser.username);
-        }
-    }, [currentUser]);
-    
+        (async () => {
+        const data = await JSON.parse(
+            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        );
+        setCurrentUserName(data.username);
+        setCurrentUserImage(data.avatarImage);
+        })();
+    }, []);
     const changeCurrentChat = (index, contact) => {
         setCurrentSelected(index);
         changeChat(contact);
@@ -22,8 +24,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
     
     return (
         <>
-        {
-            currentUserImage && currentUserName && (
+        {currentUserImage && currentUserName && (
                 <Container>
                     <div className="brand">
                         <img src={Logo} alt="logo" />
@@ -64,10 +65,9 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
                         </div>
                     </div>
                 </Container>
-            )
-        }
+            )}
         </>
-    )
+    );
 }
 const Container = styled.div`
     display: grid;

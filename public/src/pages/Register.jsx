@@ -64,6 +64,7 @@ export default function Register() {
             return false;
         } else if(email === "") {
             toast.error("email is required", toastOption);
+            return false;
         }
         return true;
     };

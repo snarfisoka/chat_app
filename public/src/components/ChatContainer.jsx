@@ -12,24 +12,23 @@ export default function ChatContainer({ currentChat, socket }) {
     const [arrivalMessage, setArrivalMessage] = useState(null);
 
     useEffect(() => {
-        async function fetchData() {
+      (async () => {
             const data = await JSON.parse(
-                localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+              localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
             );
             const response = await axios.post(receiveMessageRoute, {
-                from: data._id,
-                to: currentChat._id,
+              from: data._id,
+              to: currentChat._id,
             });
             setMessages(response.data);
-        }
-        fetchData();
+          })();
     }, [currentChat]);
 
     useEffect(() => {
         const getCurrentChat = async () => {
             if (currentChat) {
                 await JSON.parse(
-                    localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+                  localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
                 )._id;
             }
         };
@@ -57,10 +56,10 @@ export default function ChatContainer({ currentChat, socket }) {
     };
 
     useEffect(() => {
-        if(socket.current) {
-            socket.current.on("msg-receive", (msg) => {
-                setArrivalMessage({ fromSelf: false, message: msg });
-            });
+        if (socket.current) {
+          socket.current.on("msg-receive", (msg) => {
+            setArrivalMessage({ fromSelf: false, message: msg });
+          });
         }
     }, [socket]);
 
@@ -69,7 +68,7 @@ export default function ChatContainer({ currentChat, socket }) {
     }, [arrivalMessage]);
 
     useEffect(() => {
-        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+      scrollRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
     return (
@@ -83,7 +82,7 @@ export default function ChatContainer({ currentChat, socket }) {
                         />
                     </div>
                     <div className="username">
-                        <h3>{currentChat.username}</h3>
+                      <h3>{currentChat.username}</h3>
                     </div>
                 </div>
                 <Logout />
