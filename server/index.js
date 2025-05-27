@@ -16,7 +16,7 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(() => {
-        console.log("DB Connection Successful");
+        console.log("Mongo Atlas Connection Successful");
     })
     .catch((err) => {
         console.error(err.message);
