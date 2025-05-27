@@ -11,7 +11,7 @@ export default function Contacts({ contacts, changeChat }) {
     useEffect(() => {
         (async () => {
         const data = await JSON.parse(
-            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+            localStorage.getItem(process.env.REACT_APP_API_URL)
         );
         setCurrentUserName(data.username);
         setCurrentUserImage(data.avatarImage);

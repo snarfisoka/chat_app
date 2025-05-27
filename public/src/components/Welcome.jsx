@@ -8,7 +8,7 @@ export default function Welcome() {
         (async () => {
             setUserName(
                 await JSON.parse(
-                    localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+                    localStorage.getItem(process.env.REACT_APP_API_URL)
                 ).username
             );
         })();

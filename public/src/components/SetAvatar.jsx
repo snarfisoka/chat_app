@@ -23,7 +23,7 @@ export default function SetAvatar() {
     };
 
     useEffect(() => {
-        const user = localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY);
+        const user = localStorage.getItem(process.env.REACT_APP_API_URL);
         if(!user) navigate("/login");
     }, [navigate]);
 
@@ -51,7 +51,7 @@ export default function SetAvatar() {
         }
 
         const user = await JSON.parse(
-            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+            localStorage.getItem(process.env.REACT_APP_API_URL)
         );
 
         const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
@@ -62,7 +62,7 @@ export default function SetAvatar() {
             user.isAvatarImageSet = true;
             user.avatarImage = data.image;
             localStorage.setItem(
-                process.env.REACT_APP_LOCALHOST_KEY,
+                process.env.REACT_APP_API_URL,
                 JSON.stringify(user)
             );
             navigate("/");

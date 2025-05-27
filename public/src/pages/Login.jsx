@@ -22,7 +22,7 @@ export default function Login() {
     };
 
     useEffect(() => {
-        if(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+        if(localStorage.getItem(process.env.REACT_APP_API_URL)) {
             navigate('/');
         }
     },[navigate]);
@@ -39,7 +39,7 @@ export default function Login() {
                 toast.error(data.msg, toastOption);
             }
             if(data.status === true) {
-                localStorage.setItem(process.env.REACT_APP_LOCALHOST_KEY, 
+                localStorage.setItem(process.env.REACT_APP_API_URL, 
                     JSON.stringify(data.user));
                 navigate("/");
             }

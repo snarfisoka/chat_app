@@ -13,7 +13,7 @@ export default function ChatContainer({ currentChat, socket }) {
     useEffect(() => {
       (async () => {
             const data = await JSON.parse(
-              localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+              localStorage.getItem(process.env.REACT_APP_API_URL)
             );
             const response = await axios.post(receiveMessageRoute, {
               from: data._id,
@@ -27,7 +27,7 @@ export default function ChatContainer({ currentChat, socket }) {
         const getCurrentChat = async () => {
             if (currentChat) {
                 await JSON.parse(
-                  localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+                  localStorage.getItem(process.env.REACT_APP_API_URL)
                 )._id;
             }
         };
@@ -36,7 +36,7 @@ export default function ChatContainer({ currentChat, socket }) {
 
     const handleSendMsg = async (msg) => {
         const data = await JSON.parse(
-            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+            localStorage.getItem(process.env.REACT_APP_API_URL)
         );
         socket.current.emit("send-msg", {
             to: currentChat._id,
