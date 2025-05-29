@@ -15,12 +15,8 @@ mongoose
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
-    .then(() => {
-        console.log("Mongo Atlas Connection Successful");
-    })
-    .catch((err) => {
-        console.error(err.message);
-    });
+    .then(() => console.log("Mongo Atlas Connection Successful"))
+    .catch((err) => console.error(err.message));
 
 app.get("/ping", (_req, res) => {
     return res.json({ msg: "Ping Successful"});
