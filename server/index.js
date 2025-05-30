@@ -16,7 +16,7 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(() => console.log("Mongo Atlas Connection Successful"))
-    .catch((err) => console.error(err.message));
+    .catch((err) => console.error("MongoDB connection failed: ", err));
 
 app.get("/ping", (_req, res) => {
     return res.json({ msg: "Ping Successful"});
